@@ -140,16 +140,16 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 deep--
             }
 
-            //start of indentation addition
-            if (
-                purityText.includes("#if") ||
-                purityText.match(/#ifwinactive.*?\s/) ||
-                purityText.match(/#ifwinnotactive.*?\s/)
-            ) {
-                deep++
-                notDeep = false
-            }
-            //if hotkey::
+            // start of indentation addition
+            // if (
+                // purityText.includes("#if") ||
+                // purityText.match(/#ifwinactive.*?\s/) ||
+                // purityText.match(/#ifwinnotactive.*?\s/)
+            // ) {
+                // deep++
+                // notDeep = false
+            // }
+            // if hotkey::
             if (!notHotkey) {
                 deep++
                 depthOfHotkey = deep

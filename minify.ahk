@@ -9,14 +9,15 @@ loop, files, out\*.js, R
     ; Run, where npx
 
     ; cmd=%ComSpec% /c npx google-closure-compiler --compilation_level ADVANCED --language_in ECMASCRIPT_2019 --language_out ECMASCRIPT_2019 --js "%A_LoopFileLongPath%" --js_output_file "%A_LoopFileLongPath%"
-    cmd=npx google-closure-compiler --compilation_level ADVANCED --language_in ECMASCRIPT_2019 --language_out ECMASCRIPT_2019 --js "%A_LoopFileLongPath%" --js_output_file "%A_LoopFileLongPath%"
-    ; cmd=npx google-closure-compiler --language_in ECMASCRIPT_2019 --language_out ECMASCRIPT_2019 --js "%A_LoopFileLongPath%" --js_output_file "%A_LoopFileLongPath%"
-    clipboard:=cmd
-    p(cmd)
+    ; cmd=npx google-closure-compiler --compilation_level ADVANCED --language_in ECMASCRIPT_2019 --language_out ECMASCRIPT_2019 --js "%A_LoopFileLongPath%" --js_output_file "%A_LoopFileLongPath%"
+    cmd=npx google-closure-compiler --language_in ECMASCRIPT_2019 --language_out ECMASCRIPT_2019 --js "%A_LoopFileLongPath%" --js_output_file "%A_LoopFileLongPath%"
+
+    ; d(cmd)
     ; p(RunCMD(cmd))
     ; RunCMD(cmd)
     ; Run,%cmd%
     Run,%ComSpec% /c %cmd%
+    ; return
 }
 SoundPlay, *-1
 sleep, 1000

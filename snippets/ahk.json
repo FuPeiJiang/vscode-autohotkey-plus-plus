@@ -360,7 +360,7 @@
     },
     "ExitApp": {
         "prefix": "ExitApp",
-        "body": "ExitApp, ${1:[ ExitCode]}",
+        "body": "ExitApp",
         "description": "Terminates the script unconditionally."
     },
     "FileAppend": {

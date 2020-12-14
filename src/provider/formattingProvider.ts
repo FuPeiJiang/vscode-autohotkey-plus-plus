@@ -28,6 +28,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         'while',
         'catch',
     ];
+    private static commandChars = ["a", "c", "e", "f", "g", "h", "i", "l", "n", "o", "p", "r", "s", "t", "v", "w", "x"]
 
     public provideDocumentFormattingEdits(
         document: vscode.TextDocument,
@@ -43,7 +44,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
         for (let line = 0; line < document.lineCount; line++) {
             const originText = document.lineAt(line).text
-            
+
             if (originText.match(/ *\/\*/)) {
                 blockComment = true
             }
@@ -98,12 +99,13 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             const trimmedTextLen = trimmedText.length
             const lastChar = trimmedText.slice(trimmedTextLen - 1)
 
-            
+
             notHotkey = true //mostly not hotkeys
             if (lastChar === ":") {
                 //if doesn't match a function
                 if (! /\b(?:autotrim|blockinput|click|clipwait|control|controlclick|controlfocus|controlget|controlgetfocus|controlgetpos|controlgettext|controlmove|controlsend|controlsendraw|controlsettext|coordmode|detecthiddentext|detecthiddenwindows|drive|driveget|drivespacefree|edit|envadd|envdiv|envget|envmult|envset|envsub|envupdate|fileappend|filecopy|filecopydir|filecreatedir|filecreateshortcut|filedelete|fileencoding|filegetattrib|filegetshortcut|filegetsize|filegettime|filegetversion|fileinstall|filemove|filemovedir|fileread|filereadline|filerecycle|filerecycleempty|fileremovedir|fileselectfile|fileselectfolder|filesetattrib|filesettime|formattime|getkeystate|gosub|goto|groupactivate|groupadd|groupclose|groupdeactivate|gui|guicontrol|guicontrolget|hotkey|ifequal|ifexist|ifgreater|ifgreaterorequal|ifinstring|ifless|iflessorequal|ifmsgbox|ifnotequal|ifnotexist|ifnotinstring|ifwinactive|ifwinexist|ifwinnotactive|ifwinnotexist|imagesearch|inidelete|iniread|iniwrite|input|inputbox|keyhistory|keywait|listhotkeys|listlines|listvars|menu|mouseclick|mouseclickdrag|mousegetpos|mousemove|msgbox|onexit|outputdebug|pause|pixelgetcolor|pixelsearch|postmessage|process|progress|random|regdelete|regread|regwrite|reload|run|runas|runwait|send|sendevent|sendinput|sendlevel|sendmessage|sendmode|sendplay|sendraw|setbatchlines|setcapslockstate|setcontroldelay|setdefaultmousespeed|setenv|setformat|setkeydelay|setmousedelay|setnumlockstate|setscrolllockstate|setstorecapslockmode|setregview|settimer|settitlematchmode|setwindelay|setworkingdir|shutdown|sleep|sort|soundbeep|soundget|soundgetwavevolume|soundplay|soundset|soundsetwavevolume|splashimage|splashtextoff|splashtexton|splitpath|statusbargettext|statusbarwait|stringcasesense|stringgetpos|stringleft|stringlen|stringlower|stringmid|stringreplace|stringright|stringsplit|stringtrimleft|stringtrimright|stringupper|suspend|sysget|thread|tooltip|transform|traytip|urldownloadtofile|winactivate|winactivatebottom|winclose|winget|wingetactivestats|wingetactivetitle|wingetclass|wingetpos|wingettext|wingettitle|winhide|winkill|winmaximize|winmenuselectitem|winminimize|winminimizeall|winminimizeallundo|winmove|winrestore|winset|winsettitle|winshow|winwait|winwaitactive|winwaitclose|winwaitnotactive)(?!\s*\:)\b/.test(trimmedText)) {
                     if (! /\b(?:autotrim|Exception|blockinput|click|clipwait|control|controlclick|controlfocus|controlget|controlgetfocus|controlgetpos|controlgettext|controlmove|controlsend|controlsendraw|controlsettext|coordmode|detecthiddentext|detecthiddenwindows|drive|driveget|drivespacefree|edit|envadd|envdiv|envget|envmult|envset|envsub|envupdate|fileappend|filecopy|filecopydir|filecreatedir|filecreateshortcut|filedelete|fileencoding|filegetattrib|filegetshortcut|filegetsize|filegettime|filegetversion|fileinstall|filemove|filemovedir|fileread|filereadline|filerecycle|filerecycleempty|fileremovedir|fileselectfile|fileselectfolder|filesetattrib|filesettime|formattime|getkeystate|gosub|goto|groupactivate|groupadd|groupclose|groupdeactivate|gui|guicontrol|guicontrolget|hotkey|ifequal|ifexist|ifgreater|ifgreaterorequal|ifinstring|ifless|iflessorequal|ifmsgbox|ifnotequal|ifnotexist|ifnotinstring|ifwinactive|ifwinexist|ifwinnotactive|ifwinnotexist|imagesearch|inidelete|iniread|iniwrite|input|inputbox|keyhistory|keywait|listhotkeys|listlines|listvars|menu|mouseclick|mouseclickdrag|mousegetpos|mousemove|msgbox|onexit|outputdebug|pause|pixelgetcolor|pixelsearch|postmessage|process|progress|random|regdelete|regread|regwrite|reload|run|runas|runwait|send|sendevent|sendinput|sendlevel|sendmessage|sendmode|sendplay|sendraw|setbatchlines|setcapslockstate|setcontroldelay|setdefaultmousespeed|setenv|setformat|setkeydelay|setmousedelay|setnumlockstate|setscrolllockstate|setstorecapslockmode|setregview|settimer|settitlematchmode|setwindelay|setworkingdir|shutdown|sleep|sort|soundbeep|soundget|soundgetwavevolume|soundplay|soundset|soundsetwavevolume|splashimage|splashtextoff|splashtexton|splitpath|statusbargettext|statusbarwait|stringcasesense|stringgetpos|stringleft|stringlen|stringlower|stringmid|stringreplace|stringright|stringsplit|stringtrimleft|stringtrimright|stringupper|suspend|sysget|thread|tooltip|transform|traytip|urldownloadtofile|winactivate|winactivatebottom|winclose|winget|wingetactivestats|wingetactivetitle|wingetclass|wingetpos|wingettext|wingettitle|winhide|winkill|winmaximize|winmenuselectitem|winminimize|winminimizeall|winminimizeallundo|winmove|winrestore|winset|winsettitle|winshow|winwait|winwaitactive|winwaitclose|winwaitnotactive)(?!\s*\:)\b/.test(trimmedText)) {
+
                         notHotkey = false
                     }
                 }
@@ -172,14 +174,53 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
 
             if (notDeep) {
+
+                const leftTrimmedText = trimmedText.trimStart()
+                const leftTrimmedLen = leftTrimmedText.length
+
+                var firstWord = ''
+                //get first word, loop every char
+                for (var i = 0; i < leftTrimmedLen; i++) {
+                    //if not a letter, slice first word
+                    if (!FormatProvider.commandChars.includes(leftTrimmedText[i])) {
+                        firstWord = leftTrimmedText.slice(0, i)
+
+                        break
+                    }
+                }
+
+
                 for (const oneCommand of FormatProvider.oneCommandList) {
-                    let temp: RegExpExecArray
-                    if (
-                        (temp = new RegExp('\\b' + oneCommand + '\\b(.*)').exec(
-                            purityText,
-                        )) != null &&
-                        !temp[1].includes('/')
-                    ) {
+                    var isCommand = false
+                    // let temp: RegExpExecArray
+                    // if (
+                    // (temp = new RegExp('\\b' + oneCommand + '\\b(.*)').exec(
+                    // purityText,
+                    // )) != null &&
+                    // !temp[1].includes('/'))
+                    // const posOfCommand
+                    // const posOfCommand = leftTrimmedText.indexOf(oneCommand)
+                    // if (line == 20) {
+                    // console.log(124423)
+                    // const beforeCommand = leftTrimmedText.slice(0, posOfCommand - 1)
+                    // console.log(beforeCommand)
+                    // }
+
+                    // if (leftTrimmedLen === oneCommand.length) {
+                    // if (leftTrimmedText === oneCommand) {
+                    // isCommand = true
+                    // }
+                    // } else {
+                    if (firstWord === oneCommand) {
+                        isCommand = true
+                    }
+                    // }
+
+
+                    // firstWord = leftTrimmedText.slice(0,)
+                    if (isCommand) {
+                        // if (leftTrimmedText.indexOf(oneCommand) === 0) {
+                        // {
                         oneCommandCode = true
                         deep++
                         break

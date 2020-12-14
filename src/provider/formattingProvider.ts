@@ -189,38 +189,12 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     }
                 }
 
-
                 for (const oneCommand of FormatProvider.oneCommandList) {
                     var isCommand = false
-                    // let temp: RegExpExecArray
-                    // if (
-                    // (temp = new RegExp('\\b' + oneCommand + '\\b(.*)').exec(
-                    // purityText,
-                    // )) != null &&
-                    // !temp[1].includes('/'))
-                    // const posOfCommand
-                    // const posOfCommand = leftTrimmedText.indexOf(oneCommand)
-                    // if (line == 20) {
-                    // console.log(124423)
-                    // const beforeCommand = leftTrimmedText.slice(0, posOfCommand - 1)
-                    // console.log(beforeCommand)
-                    // }
-
-                    // if (leftTrimmedLen === oneCommand.length) {
-                    // if (leftTrimmedText === oneCommand) {
-                    // isCommand = true
-                    // }
-                    // } else {
                     if (firstWord === oneCommand) {
                         isCommand = true
                     }
-                    // }
-
-
-                    // firstWord = leftTrimmedText.slice(0,)
                     if (isCommand) {
-                        // if (leftTrimmedText.indexOf(oneCommand) === 0) {
-                        // {
                         oneCommandCode = true
                         deep++
                         break

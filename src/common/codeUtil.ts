@@ -5,7 +5,6 @@ export class CodeUtil {
      */
     public static purity_greedy(origin: string): string {
         if (!origin) return '';
-        // TODO: untest
         return origin
             .replace(/;.+/, '')
             .replace(/".*?"/g, '')
@@ -15,9 +14,8 @@ export class CodeUtil {
             .replace(/\b(msgbox)\b.+?%/gi, '$1');
     }
 
-    public static purity(origin: string, greedy: boolean = false): string {
+    public static purity(origin: string): string {
         if (!origin) return '';
-        // TODO: untest
         return origin
             .replace(/;.+/, '')
             .replace(/".*?"/g, '')
